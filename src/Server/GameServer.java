@@ -107,7 +107,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
     }
 
     private void fillGrid() {
-        Random random = new Random();
+        //Random random = new Random();
         for (int i = 0; i < SIZE; i += SUBGRID_SIZE) {
             fillSubgrid(i, i);
         }
@@ -122,7 +122,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 
     private void fillSubgrid(int startRow, int startCol) {
         //Fill 3x3 subgrid with random numbers
-        Random random = new Random();
+        //Random random = new Random();
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         shuffleArray(values);

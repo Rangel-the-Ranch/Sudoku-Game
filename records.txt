@@ -1,1 +1,6 @@
 Ranch 1 1
+Player 6 -25
+Player 4 -13
+ranch 2 -10
+2134 2 -16
+Guest 5 -19

@@ -53,6 +53,8 @@ public class Sudoku {
             remoteObject.cleanUp();
 
         } catch (Exception e) {
+
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
         wrongMoves = 0;
@@ -72,6 +74,7 @@ public class Sudoku {
             //Clean up the server's records (Although this is not necessary in this case)
             remoteObject.cleanUp();
         } catch (Exception e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
     }

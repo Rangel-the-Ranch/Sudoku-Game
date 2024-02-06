@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.net.URL;
+
 public class Client extends Application{
     public static void main(String[] args) {
         launch(args);
@@ -12,11 +14,15 @@ public class Client extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         //Load the board
-        Parent root = FXMLLoader.load(getClass().getResource("Client/board.fxml"));
-        Scene scene = new Scene(root, 610, 800);
-        stage.setTitle("Sudoku Game");
-        stage.setScene(scene);
-        stage.show();
+        URL boardFile = getClass().getResource("Client/board.fxml");
+        if (boardFile != null) {
+            Parent root = FXMLLoader.load(boardFile);
+            Scene scene = new Scene(root, 610, 800);
+            stage.setTitle("Sudoku Game");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            System.out.println("FXML file not found");
+        }
     }
-
 }

@@ -2,6 +2,7 @@ package Server;
 
 import java.io.Serializable;
 //class to store the sudoku puzzle and its solution. It is serializable so that it can be sent over the network
+@SuppressWarnings("unused")
 public class SudokuPuzzle implements Serializable {
     int[][] puzzle;
     int[][] solution;

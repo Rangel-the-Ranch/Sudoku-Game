@@ -1,6 +1,7 @@
 package Server;
 import java.io.Serializable;
 //class to store the stats of the player(name, score, time). It is serializable so that it can be sent over the network
+@SuppressWarnings("unused")
 public class Stat implements Serializable {
     String name;
     int score;

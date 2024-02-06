@@ -16,7 +16,8 @@ public class Server {
             System.out.println("Server is ready");
 
         } catch (Exception e) {
-            System.out.println(e);
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
         }
     }
 

@@ -1,5 +1,6 @@
 package Client;
 //This class is used to store the move made by the player
+@SuppressWarnings("unused")
 public class SudokuMove {
     int x;
     int y;

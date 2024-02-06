@@ -36,6 +36,7 @@ public class BoardController implements Initializable {
     private int seconds = 0;
     private final Sudoku sudoku = new Sudoku();
     private static final int SIZE = 9;
+    private static final String DEFAULT_NAME = "Guest";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,6 +156,9 @@ public class BoardController implements Initializable {
     }
     @FXML
     private void boardMove(ActionEvent event) {
+        if(selectedNumber == 0){
+            return;
+        }
         Button clickedButton = (Button) event.getSource();
         if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
             clickedButton.setText( String.valueOf(selectedNumber));
@@ -207,7 +211,7 @@ public class BoardController implements Initializable {
             return newStr.substring(0, 20);
         }
         if(newStr.isEmpty()){
-            return "Player";
+            return DEFAULT_NAME;
         }
         return newStr;
     }
@@ -218,7 +222,9 @@ public class BoardController implements Initializable {
         Label inputLabel = new Label("Enter your name:");
         inputLabel.setStyle("-fx-font-weight: bold;");
         Button submitButton = new Button("Submit");
-        submitButton.setStyle("-fx-background-color: #5DADE2; -fx-text-fill: white;");
+        submitButton.setStyle("-fx-background-color: #5DADE2; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-border-width: 1px;");
+        //Add frame to the button
+
 
         //Create a dialog layout including the input field and submit button
         VBox dialogLayout = new VBox(10, inputLabel, inputField, submitButton);
@@ -266,16 +272,7 @@ public class BoardController implements Initializable {
             }
         }
         //set initial board and disable starting buttons
-        for(int x=0; x<SIZE; x++){
-            for(int y=0; y<SIZE; y++){
-                int cellValue = sudoku.getBoard()[x][y];
-                Button button = findButtonAtPosition(board, x, y);
-                if (button != null) {
-                    button.setText(cellValue == 0 ? "" : String.valueOf(cellValue));
-                    button.setDisable(cellValue != 0);
-                }
-            }
-        }
+        updateBoard();
     }
     @FXML
     private void numberSelect(KeyEvent event) {
@@ -286,10 +283,8 @@ public class BoardController implements Initializable {
             selectLabel.setText("Selected: " + keyText);
         }
     }
-    @FXML
-    private void solution() {
-        //Solve the board and display the solution
-        sudoku.solve();
+    private void updateBoard(){
+        //Update the board with the current state of the game
         for(int x=0; x<SIZE; x++){
             for(int y=0; y<SIZE; y++){
                 int cellValue = sudoku.getBoard()[x][y];
@@ -300,6 +295,12 @@ public class BoardController implements Initializable {
                 }
             }
         }
+    }
+    @FXML
+    private void solution() {
+        //Solve the board and display the solution
+        sudoku.solve();
+        updateBoard();
         timeline.stop();
         //disable undo and redo
         for(Node node : undoRedoButtons.getChildren()){
