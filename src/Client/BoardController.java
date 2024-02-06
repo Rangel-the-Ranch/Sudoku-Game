@@ -1,4 +1,5 @@
 package Client;
+
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -6,7 +7,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.animation.KeyFrame;
@@ -15,6 +23,9 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.io.IOException;
+
+
 
 public class BoardController implements Initializable {
 
@@ -146,7 +157,7 @@ public class BoardController implements Initializable {
         }
     }
     @FXML
-    private void boardMove(ActionEvent event) {
+    private void boardMove(ActionEvent event) throws IOException {
         Button clickedButton = (Button) event.getSource();
         if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
             clickedButton.setText( String.valueOf(selectedNumber));
@@ -171,7 +182,12 @@ public class BoardController implements Initializable {
                 timeline.stop();
                 selectLabel.setText("Solved!");
                 timeLabel.setText("Score: "+sudoku.getScore(seconds));
-                sudoku.sendStats(seconds);
+
+                //Get the player's name
+                String name = openInputDialog((Stage) root.getScene().getWindow());
+                name = covertName(name);
+                sudoku.sendStats(seconds, name);
+
                 //disable undo and redo at the end of the game
                 for(Node node : undoRedoButtons.getChildren()){
                     if(node instanceof Button){
@@ -184,6 +200,53 @@ public class BoardController implements Initializable {
             }
         }
     }
+    private String covertName(String name){
+        // Regular expression to match characters other than alphanumeric and underscore
+        String regex = "[^a-zA-Z0-9_]";
+
+        String newStr = name.replaceAll(regex, "");
+
+        if(newStr.length() > 20){
+            return newStr.substring(0, 20);
+        }
+        if(newStr.isEmpty()){
+            return "Player";
+        }
+        return newStr;
+    }
+    //Open a dialog to get the player's name
+    //https://stackoverflow.com/questions/8309981/how-to-create-and-show-common-dialog-error-warning-confirmation-in-javafx-2
+    private String openInputDialog(Stage primaryStage) {
+        TextField inputField = new TextField();
+        Label inputLabel = new Label("Enter your name:");
+        inputLabel.setStyle("-fx-font-weight: bold;");
+        Button submitButton = new Button("Submit");
+        submitButton.setStyle("-fx-background-color: #5DADE2; -fx-text-fill: white;");
+
+        //Create a dialog layout including the input field and submit button
+        VBox dialogLayout = new VBox(10, inputLabel, inputField, submitButton);
+        dialogLayout.setPadding(new Insets(20));
+        dialogLayout.setStyle("-fx-background-color: #EADDCA; -fx-border-color: #ccc; -fx-border-width: 1px;");
+        dialogLayout.setAlignment(Pos.CENTER);
+
+        Scene dialogScene = new Scene(dialogLayout, 250, 100);
+
+        //Create a new stage and set the dialog layout as the scene
+        Stage inputDialog = new Stage();
+        //Set the dialog to be application modal(Block input events to other windows)
+        inputDialog.initModality(Modality.APPLICATION_MODAL);
+        //Set the owner of the dialog to the main stage
+        inputDialog.initOwner(primaryStage);
+        inputDialog.setScene(dialogScene);
+        inputDialog.setTitle("Puzzle Solved!");
+        //Set the button action to close the dialog
+        submitButton.setOnAction(e -> inputDialog.close());
+
+        inputDialog.showAndWait();
+
+        return inputField.getText();
+    }
+
     @FXML
     private void difficultyChange(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();

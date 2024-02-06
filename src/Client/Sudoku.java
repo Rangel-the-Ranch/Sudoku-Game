@@ -60,13 +60,13 @@ public class Sudoku {
         //score is calculated by the number of moves made, the number of wrong moves, and the time taken
         return (int) (moves.size()*2 - wrongMoves*3 - 0.01*time);
     }
-    public void sendStats(int time){
+    public void sendStats(int time, String name){
         //When the game is over, send the stats to the server (Supposedly this is called when the game is over)
         int score = getScore(time);
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", SERVER_PORT);
             SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
-            remoteObject.receiveStat(new Stat("Test",time,score));
+            remoteObject.receiveStat(new Stat(name,time,score));
             //After sending the stats, close the connection
             //Clean up the server's records (Although this is not necessary in this case)
             remoteObject.cleanUp();
