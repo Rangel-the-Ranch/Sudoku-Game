@@ -9,11 +9,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Sudoku {
-    private final ArrayList<SudokuMove> moves = new ArrayList<>();
-    private final ArrayList<SudokuMove> undoneMoves = new ArrayList<>();
-    private int[][] board = new int[9][9];
-    private int[][] solution = new int[9][9];
+    private final ArrayList<SudokuMove> moves = new ArrayList<>(); //moves made by the player
+    private final ArrayList<SudokuMove> undoneMoves = new ArrayList<>(); // moves that were undone
+    private static final int SIZE = 9;
+    private static final int SERVER_PORT = 8000;
+    private int[][] board = new int[SIZE][SIZE];
+    private int[][] solution = new int[SIZE][SIZE];
     private int wrongMoves = 0;
+
 
 
 
@@ -30,8 +33,9 @@ public class Sudoku {
 
     public void startup(String difficulty) {
         reset();
+        //Connect to the server and get a puzzle
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 8000);
+            Registry registry = LocateRegistry.getRegistry("localhost", SERVER_PORT);
 
             SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
             SudokuPuzzle temp = null;
@@ -44,6 +48,7 @@ public class Sudoku {
             }
             this.board = temp.getPuzzle();
             this.solution = temp.getSolution();
+            //After getting the puzzle, clear the server's records and close the connection
             remoteObject.cleanUp();
 
         } catch (Exception e) {
@@ -52,14 +57,18 @@ public class Sudoku {
         wrongMoves = 0;
     }
     public int getScore(int time){
+        //score is calculated by the number of moves made, the number of wrong moves, and the time taken
         return (int) (moves.size()*2 - wrongMoves*3 - 0.01*time);
     }
     public void sendStats(int time){
+        //When the game is over, send the stats to the server (Supposedly this is called when the game is over)
         int score = getScore(time);
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 8000);
+            Registry registry = LocateRegistry.getRegistry("localhost", SERVER_PORT);
             SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
-            remoteObject.receiveStat(new Stat("Test",time,score));//TODO
+            remoteObject.receiveStat(new Stat("Test",time,score));
+            //After sending the stats, close the connection
+            //Clean up the server's records (Although this is not necessary in this case)
             remoteObject.cleanUp();
         } catch (Exception e) {
             System.out.println(e);
@@ -69,9 +78,11 @@ public class Sudoku {
         board = solution;
     }
     public boolean addMove(SudokuMove move) {
+        //add a move to the board. If the move is invalid, return false and increment wrongMoves
         if (isValidMove(move)) {
             moves.add(move);
             board[move.getX()][move.getY()] = move.getValue();
+            //if the move is valid, clear the undoneMoves list(They will be overwritten by the new moves)
             undoneMoves.clear();
             return true;
         }
@@ -79,6 +90,7 @@ public class Sudoku {
         return false;
     }
     public SudokuMove undoMove() {
+        //undo the last move made and add it to the undoneMoves list
         if (!moves.isEmpty()) {
             SudokuMove move = moves.remove(moves.size() - 1);
             board[move.getX()][move.getY()] = 0;
@@ -88,6 +100,7 @@ public class Sudoku {
         return null;
     }
     public SudokuMove redoMove() {
+        //redo the last move made and add it to the moves list
         if (!undoneMoves.isEmpty()) {
             SudokuMove move = undoneMoves.remove(undoneMoves.size() - 1);
             moves.add(move);
@@ -98,8 +111,9 @@ public class Sudoku {
     }
 
     public boolean isSolved() {
-        for( int x = 0; x < 9; x++ ) {
-            for( int y = 0; y < 9; y++ ) {
+        //Considering that we made only valid moves, the board is solved if there are no empty cells
+        for( int x = 0; x < SIZE; x++ ) {
+            for( int y = 0; y < SIZE; y++ ) {
                 if( board[x][y] == 0 ) {
                     return false;
                 }
@@ -116,20 +130,21 @@ public class Sudoku {
         initialBoard();
     }
     private void initialBoard() {
-        for (int x = 0; x < 9; x++) {
-            for (int y = 0; y < 9; y++) {
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
                 board[x][y] = 0;
             }
         }
     }
     private boolean isValidMove(SudokuMove move) {
+        //check if the move is valid by checking if the value is already in the row, column, or 3x3 square
         int x = move.getX();
         int y = move.getY();
         int value = move.getValue();
         if (board[x][y] != 0) {
             return false;
         }
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < SIZE; i++) {
             if (board[x][i] == value) {
                 return false;
             }

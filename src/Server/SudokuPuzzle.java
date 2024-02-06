@@ -1,13 +1,14 @@
 package Server;
 
 import java.io.Serializable;
-
+//class to store the sudoku puzzle and its solution. It is serializable so that it can be sent over the network
 public class SudokuPuzzle implements Serializable {
     int[][] puzzle;
     int[][] solution;
+    private static final int SIZE = 9;
     public SudokuPuzzle(){
-        puzzle = new int[9][9];
-        solution = new int[9][9];
+        puzzle = new int[SIZE][SIZE];
+        solution = new int[SIZE][SIZE];
     }
     public SudokuPuzzle(int[][] puzzle, int[][] solution){
         this.puzzle = puzzle;
@@ -26,16 +27,16 @@ public class SudokuPuzzle implements Serializable {
         this.solution = solution;
     }
     public void printPuzzle(){
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
                 System.out.print(puzzle[i][j] + " ");
             }
             System.out.println();
         }
     }
     public void printSolution(){
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
                 System.out.print(solution[i][j] + " ");
             }
             System.out.println();

@@ -1,4 +1,3 @@
-//https://geeksforgeeks.org/program-sudoku-generator/
 package Server;
 
 import java.util.Random;
@@ -17,6 +16,7 @@ import java.io.FileReader;
 
 public class SudokuGenerator extends UnicastRemoteObject implements SudokuGeneratorInterface{
     public static void main(String[] args) throws RemoteException {
+        //Test the SudokuGenerator
         SudokuGenerator sudoku = new SudokuGenerator();
         SudokuPuzzle temp = sudoku.getPuzzle(32);
 
@@ -30,7 +30,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
     @Override
     public void receiveStat(Stat stat) throws RemoteException {
         System.out.println("Received Stat: " + stat.toString());
-
+        //Append the stat to the records file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(RecordsFile, true))) {
             writer.write(stat.toString());
             writer.newLine();
@@ -39,15 +39,16 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
         }
         generateStatsFile();
     }
+    //Generate the stats file.
     private void generateStatsFile() {
-
+        //Maps to store the total time, total score, and occurrences for each player
         Map<String, Integer> totalTimeMap = new HashMap<>();
         Map<String, Integer> totalScoreMap = new HashMap<>();
         Map<String, Integer> occurrencesMap = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(RecordsFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(StatisticsFile))) {
-
+            //Read each line and update the maps
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] components = line.split(" ");
@@ -55,12 +56,11 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
                 String name = components[0];
                 int time = Integer.parseInt(components[1]);
                 int score = Integer.parseInt(components[2]);
-
                 totalTimeMap.put(name, totalTimeMap.getOrDefault(name, 0) + time);
                 totalScoreMap.put(name, totalScoreMap.getOrDefault(name, 0) + score);
                 occurrencesMap.put(name, occurrencesMap.getOrDefault(name, 0) + 1);
             }
-
+            //Write the stats to the file
             for (String name : totalTimeMap.keySet()) {
                 int totalTime = totalTimeMap.get(name);
                 int totalScore = totalScoreMap.get(name);
@@ -87,16 +87,19 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
         generate();
         return new SudokuPuzzle(grid, solution);
     }
+    //clean up the grid and solution used after the puzzle is generated
     public void cleanUp() throws RemoteException{
         grid = new int[SIZE][SIZE];
         solution = new int[SIZE][SIZE];
     }
 
+
     public SudokuGenerator() throws RemoteException{
         grid = new int[SIZE][SIZE];
         solution = new int[SIZE][SIZE];
     }
-
+    //https://geeksforgeeks.org/program-sudoku-generator/
+    //https://medium.com/analytics-vidhya/sudoku-backtracking-algorithm-and-visualization-75adec8e860c
     private void generate() {
         fillGrid();
         fillSolution();
@@ -118,6 +121,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
     }
 
     private void fillSubgrid(int startRow, int startCol) {
+        //Fill 3x3 subgrid with random numbers
         Random random = new Random();
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -130,7 +134,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
             }
         }
     }
-
+    //Solve the puzzle using backtracking
     private boolean solve(int row, int col) {
         if (row == SIZE - 1 && col == SIZE)
             return true;
@@ -155,7 +159,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
         }
         return false;
     }
-
+    //Check if the number is valid in the given cell
     private boolean isValid(int row, int col, int num) {
         for (int x = 0; x < SIZE; x++) {
             if (grid[row][x] == num || grid[x][col] == num || grid[row - row % SUBGRID_SIZE + x / SUBGRID_SIZE][col - col % 3 + x % SUBGRID_SIZE] == num)
@@ -163,7 +167,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
         }
         return true;
     }
-
+    //Remove cells from the grid to create the puzzle
     private void removeCells() {
         Random random = new Random();
 
@@ -177,7 +181,8 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
             }
         }
     }
-
+    //Fisher-Yates shuffle algorithm
+    //https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
     private void shuffleArray(int[] array) {
         Random random = new Random();
         for (int i = array.length - 1; i > 0; i--) {

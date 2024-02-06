@@ -27,6 +27,7 @@ public class BoardController implements Initializable {
     private Timeline timeline;
     private int seconds = 0;
     private final Sudoku sudoku = new Sudoku();
+    private static final int SIZE = 9;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -34,15 +35,15 @@ public class BoardController implements Initializable {
         root.setOnKeyPressed(this::numberSelect);
         sudoku.startup("medium");
         timerStart();
-        //disable undo and redo
+        //disable undo and redo (No moves to undo or redo)
         for(Node node : undoRedoButtons.getChildren()){
             if(node instanceof Button){
                 node.setDisable(true);
             }
         }
-
-        for(int x=0; x<9; x++){
-            for(int y=0; y<9; y++){
+        //set initial board and disable starting buttons
+        for(int x=0; x<SIZE; x++){
+            for(int y=0; y<SIZE; y++){
                 int cellValue = sudoku.getBoard()[x][y];
                 if (cellValue != 0) {
                     Button button = findButtonAtPosition(board, x, y);
@@ -55,6 +56,7 @@ public class BoardController implements Initializable {
         }
 
     }
+    //Starts the timer
     private void timerStart(){
         if(timeline != null){
             timeline.stop();
@@ -73,6 +75,7 @@ public class BoardController implements Initializable {
         int remainingSeconds = seconds % 60;
         timeLabel.setText(String.format("%02d:%02d", minutes, remainingSeconds));
     }
+    //Finds the button at a given position in the grid
     private Button findButtonAtPosition(GridPane gridPane, int row, int col) {
         for (Node node : gridPane.getChildren()) {
             if (node instanceof Button) {
@@ -96,7 +99,7 @@ public class BoardController implements Initializable {
                     button.setText("");
                 }
             }
-            //enable redo
+            //enable redo (if there are moves to redo)
             for(Node node : undoRedoButtons.getChildren()){
                 if(node instanceof Button){
                     if(GridPane.getColumnIndex(node) == 1){
@@ -132,7 +135,7 @@ public class BoardController implements Initializable {
                     }
                 }
             }
-            //enable undo
+            //enable undo (if there are moves to undo)
             for(Node node : undoRedoButtons.getChildren()){
                 if(node instanceof Button){
                     if(GridPane.getColumnIndex(node) == 0){
@@ -147,7 +150,7 @@ public class BoardController implements Initializable {
         Button clickedButton = (Button) event.getSource();
         if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
             clickedButton.setText( String.valueOf(selectedNumber));
-            //disable redo
+            //disable redo (if there are no moves to redo)
             for(Node node : undoRedoButtons.getChildren()){
                 if(node instanceof Button){
                     if(GridPane.getColumnIndex(node) == 1){
@@ -155,7 +158,7 @@ public class BoardController implements Initializable {
                     }
                 }
             }
-            //enable undo
+            //enable undo (if there are moves to undo)
             for(Node node : undoRedoButtons.getChildren()){
                 if(node instanceof Button){
                     if(GridPane.getColumnIndex(node) == 0){
@@ -164,11 +167,12 @@ public class BoardController implements Initializable {
                 }
             }
             if(sudoku.isSolved()){
+                //If the game is solved, stop the timer ,display the score and send the score to the server
                 timeline.stop();
                 selectLabel.setText("Solved!");
                 timeLabel.setText("Score: "+sudoku.getScore(seconds));
                 sudoku.sendStats(seconds);
-
+                //disable undo and redo at the end of the game
                 for(Node node : undoRedoButtons.getChildren()){
                     if(node instanceof Button){
                         node.setDisable(true);
@@ -187,7 +191,7 @@ public class BoardController implements Initializable {
         timerStart();
         selectedNumber = 0;
         selectLabel.setText("Selected: " + 0);
-
+        //request a new board based on the difficulty
         if(GridPane.getColumnIndex(clickedButton) == 0){
             sudoku.startup("easy");
         } else if(GridPane.getColumnIndex(clickedButton) == 1){
@@ -195,15 +199,15 @@ public class BoardController implements Initializable {
         } else{
             sudoku.startup("hard");
         }
-        //disable undo and redo
+        //disable undo and redo (No moves to undo or redo)
         for(Node node : undoRedoButtons.getChildren()){
             if(node instanceof Button){
                 node.setDisable(true);
             }
         }
-
-        for(int x=0; x<9; x++){
-            for(int y=0; y<9; y++){
+        //set initial board and disable starting buttons
+        for(int x=0; x<SIZE; x++){
+            for(int y=0; y<SIZE; y++){
                 int cellValue = sudoku.getBoard()[x][y];
                 Button button = findButtonAtPosition(board, x, y);
                 if (button != null) {
@@ -215,6 +219,7 @@ public class BoardController implements Initializable {
     }
     @FXML
     private void numberSelect(KeyEvent event) {
+        //Select a number to place on the board. If the number is valid, it will be placed on the board
         String keyText = event.getText();
         if (keyText.matches("[1-9]")) {
             selectedNumber = Integer.parseInt(keyText);
@@ -223,9 +228,10 @@ public class BoardController implements Initializable {
     }
     @FXML
     private void solution(ActionEvent event) {
+        //Solve the board and display the solution
         sudoku.solve();
-        for(int x=0; x<9; x++){
-            for(int y=0; y<9; y++){
+        for(int x=0; x<SIZE; x++){
+            for(int y=0; y<SIZE; y++){
                 int cellValue = sudoku.getBoard()[x][y];
                 Button button = findButtonAtPosition(board, x, y);
                 if (button != null) {

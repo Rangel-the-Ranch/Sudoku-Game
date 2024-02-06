@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import Server.SudokuPuzzle;
+//interface for the sudoku generator.
 public interface SudokuGeneratorInterface extends Remote{
     public SudokuPuzzle getPuzzle(int K) throws RemoteException;
     public void cleanUp() throws RemoteException;
