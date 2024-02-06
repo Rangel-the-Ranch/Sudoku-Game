@@ -166,6 +166,7 @@ public class BoardController implements Initializable {
             if(sudoku.isSolved()){
                 timeline.stop();
                 selectLabel.setText("Solved!");
+                timeLabel.setText("Score: "+sudoku.getScore(seconds));
                 sudoku.sendStats(seconds);
 
                 for(Node node : undoRedoButtons.getChildren()){

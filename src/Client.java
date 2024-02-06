@@ -15,9 +15,7 @@ public class Client extends Application{
     }
     @Override
     public void start(Stage stage) throws Exception {
-
         Parent root = FXMLLoader.load(getClass().getResource("Client/board.fxml"));
-
         Scene scene = new Scene(root, 610, 800);
         stage.setTitle("Sudoku Game");
         stage.setScene(scene);

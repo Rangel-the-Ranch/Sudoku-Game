@@ -13,6 +13,7 @@ public class Sudoku {
     private final ArrayList<SudokuMove> undoneMoves = new ArrayList<>();
     private int[][] board = new int[9][9];
     private int[][] solution = new int[9][9];
+    private int wrongMoves = 0;
 
 
 
@@ -28,6 +29,7 @@ public class Sudoku {
     }
 
     public void startup(String difficulty) {
+        reset();
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 8000);
 
@@ -47,18 +49,21 @@ public class Sudoku {
         } catch (Exception e) {
             System.out.println(e);
         }
+        wrongMoves = 0;
+    }
+    public int getScore(int time){
+        return (int) (moves.size()*2 - wrongMoves*3 - 0.01*time);
     }
     public void sendStats(int time){
+        int score = getScore(time);
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 8000);
             SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
-            remoteObject.receiveStat(new Stat("Test",time,69));//TODO
+            remoteObject.receiveStat(new Stat("Test",time,score));//TODO
             remoteObject.cleanUp();
         } catch (Exception e) {
             System.out.println(e);
         }
-
-
     }
     public void solve() {
         board = solution;
@@ -70,6 +75,7 @@ public class Sudoku {
             undoneMoves.clear();
             return true;
         }
+        wrongMoves++;
         return false;
     }
     public SudokuMove undoMove() {
@@ -104,7 +110,11 @@ public class Sudoku {
     public int[][] getBoard() {
         return board;
     }
-    public void reset() { moves.clear(); initialBoard();}
+    public void reset() {
+        moves.clear();
+        wrongMoves = 0;
+        initialBoard();
+    }
     private void initialBoard() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
