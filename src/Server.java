@@ -1,5 +1,5 @@
 
-import Server.SudokuGenerator;
+import Server.GameServer;
 import java.rmi.registry.*;
 
 public class Server {
@@ -7,7 +7,7 @@ public class Server {
     public static void main(String[] args){
         try {
             //Create and export a remote object
-            SudokuGenerator stub = new SudokuGenerator();
+            GameServer stub = new GameServer();
 
             Registry registry = LocateRegistry.createRegistry(PORT);
 

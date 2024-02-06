@@ -23,9 +23,6 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.io.IOException;
-
-
 
 public class BoardController implements Initializable {
 
@@ -157,7 +154,7 @@ public class BoardController implements Initializable {
         }
     }
     @FXML
-    private void boardMove(ActionEvent event) throws IOException {
+    private void boardMove(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
             clickedButton.setText( String.valueOf(selectedNumber));
@@ -290,7 +287,7 @@ public class BoardController implements Initializable {
         }
     }
     @FXML
-    private void solution(ActionEvent event) {
+    private void solution() {
         //Solve the board and display the solution
         sudoku.solve();
         for(int x=0; x<SIZE; x++){

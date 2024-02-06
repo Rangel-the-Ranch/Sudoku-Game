@@ -14,10 +14,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 
-public class SudokuGenerator extends UnicastRemoteObject implements SudokuGeneratorInterface{
+public class GameServer extends UnicastRemoteObject implements GameServerInterface{
     public static void main(String[] args) throws RemoteException {
         //Test the SudokuGenerator
-        SudokuGenerator sudoku = new SudokuGenerator();
+        GameServer sudoku = new GameServer();
         SudokuPuzzle temp = sudoku.getPuzzle(32);
 
         System.out.println("Generated Sudoku Puzzle:");
@@ -94,7 +94,7 @@ public class SudokuGenerator extends UnicastRemoteObject implements SudokuGenera
     }
 
 
-    public SudokuGenerator() throws RemoteException{
+    public GameServer() throws RemoteException{
         grid = new int[SIZE][SIZE];
         solution = new int[SIZE][SIZE];
     }

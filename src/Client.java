@@ -1,11 +1,8 @@
-import Client.*;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 
 public class Client extends Application{
     public static void main(String[] args) {

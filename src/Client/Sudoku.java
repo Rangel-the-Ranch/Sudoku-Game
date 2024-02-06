@@ -1,7 +1,8 @@
 package Client;
 
 import java.util.ArrayList;
-import Server.SudokuGeneratorInterface;
+
+import Server.GameServerInterface;
 import Server.SudokuPuzzle;
 import Server.Stat;
 
@@ -37,8 +38,8 @@ public class Sudoku {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", SERVER_PORT);
 
-            SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
-            SudokuPuzzle temp = null;
+            GameServerInterface remoteObject = (GameServerInterface) registry.lookup("SudokuServer");
+            SudokuPuzzle temp;
 
             switch (difficulty) {
                 case "easy" -> temp = remoteObject.getPuzzle(41);
@@ -52,7 +53,7 @@ public class Sudoku {
             remoteObject.cleanUp();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         wrongMoves = 0;
     }
@@ -65,13 +66,13 @@ public class Sudoku {
         int score = getScore(time);
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", SERVER_PORT);
-            SudokuGeneratorInterface remoteObject = (SudokuGeneratorInterface) registry.lookup("SudokuServer");
+            GameServerInterface remoteObject = (GameServerInterface) registry.lookup("SudokuServer");
             remoteObject.receiveStat(new Stat(name,time,score));
             //After sending the stats, close the connection
             //Clean up the server's records (Although this is not necessary in this case)
             remoteObject.cleanUp();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
     public void solve() {
