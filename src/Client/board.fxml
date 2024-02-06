@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="root" prefHeight="720.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.BoardController">
+   <GridPane fx:id="board" alignment="center" hgap="5" layoutX="60.0" layoutY="100.0" vgap="5">
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="0" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+      <Button onAction="#boardMove" prefHeight="50" prefWidth="50" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+   </GridPane>
+   <GridPane fx:id="difficultyButtons" alignment="center" hgap="20" layoutX="165.0" layoutY="30.0" vgap="20">
+      <Button onAction="#difficultyChange" prefHeight="50" prefWidth="80" text="Easy" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <Button onAction="#difficultyChange" prefHeight="50" prefWidth="80" text="Medium" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <Button onAction="#difficultyChange" prefHeight="50" prefWidth="80" text="Hard" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+   </GridPane>
+
+   <Label fx:id="selectLabel" layoutX="60.0" layoutY="598.0" prefHeight="50.0" prefWidth="100.0" text="Selected: 0">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+
+   <GridPane fx:id="undoRedoButtons" alignment="center" hgap="10" layoutX="360.0" layoutY="610.0" prefHeight="38.0" prefWidth="170.0" vgap="10">
+      <Button minHeight="50" minWidth="80" onAction="#undoRedoAction" text="Undo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <Button minHeight="50" minWidth="80" onAction="#undoRedoAction" text="Redo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+   </GridPane>
+   <Button layoutX="210.0" layoutY="635.0" mnemonicParsing="false" onAction="#solution" text="Solution" />
+   <Label fx:id="timeLabel" layoutX="60.0" layoutY="650.0" prefHeight="25.0" prefWidth="50.0" text="Tme: 0" />
+</Pane>
