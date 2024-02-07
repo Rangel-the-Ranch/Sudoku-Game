@@ -1,6 +1,6 @@
-
 import Server.GameServer;
-import java.rmi.registry.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class Server {
     private static final int PORT = 8000;

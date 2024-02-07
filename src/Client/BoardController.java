@@ -25,6 +25,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BoardController implements Initializable {
+    private static final int SIZE = 9;
+    private static final String DEFAULT_NAME = "Guest";
 
     @FXML private Label selectLabel;
     @FXML private Pane root;
@@ -35,8 +37,6 @@ public class BoardController implements Initializable {
     private Timeline timeline;
     private int seconds = 0;
     private final Sudoku sudoku = new Sudoku();
-    private static final int SIZE = 9;
-    private static final String DEFAULT_NAME = "Guest";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,11 +156,19 @@ public class BoardController implements Initializable {
     }
     @FXML
     private void boardMove(ActionEvent event) {
-        if(selectedNumber == 0){
-            return;
-        }
         Button clickedButton = (Button) event.getSource();
-        if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
+        if(selectedNumber == 0){
+            //Remove the move from the board
+            sudoku.removeMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton),selectedNumber));
+            clickedButton.setText("");
+            //disable undo and redo (No moves to undo or redo)
+            for(Node node : undoRedoButtons.getChildren()){
+                if(node instanceof Button){
+                    node.setDisable(true);
+                }
+            }
+
+        } else if(sudoku.addMove(new SudokuMove(GridPane.getRowIndex(clickedButton), GridPane.getColumnIndex(clickedButton), selectedNumber))){
             clickedButton.setText( String.valueOf(selectedNumber));
             //disable redo (if there are no moves to redo)
             for(Node node : undoRedoButtons.getChildren()){
@@ -195,9 +203,6 @@ public class BoardController implements Initializable {
                         node.setDisable(true);
                     }
                 }
-
-
-
             }
         }
     }
@@ -256,7 +261,7 @@ public class BoardController implements Initializable {
         sudoku.reset();
         timerStart();
         selectedNumber = 0;
-        selectLabel.setText("Selected: " + 0);
+        selectLabel.setText("Selected: ");
         //request a new board based on the difficulty
         if(GridPane.getColumnIndex(clickedButton) == 0){
             sudoku.startup("easy");
@@ -281,10 +286,13 @@ public class BoardController implements Initializable {
         if (keyText.matches("[1-9]")) {
             selectedNumber = Integer.parseInt(keyText);
             selectLabel.setText("Selected: " + keyText);
+        }else if (keyText.equals("0")) {
+            selectedNumber = 0;
+            selectLabel.setText("Selected: Remove");
         }
     }
+    //Update the board with the current state of the game
     private void updateBoard(){
-        //Update the board with the current state of the game
         for(int x=0; x<SIZE; x++){
             for(int y=0; y<SIZE; y++){
                 int cellValue = sudoku.getBoard()[x][y];
