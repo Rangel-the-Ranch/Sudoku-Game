@@ -26,7 +26,6 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//цомент
 public class BoardController implements Initializable {
     private static final int SIZE = 9;
     private static final String DEFAULT_NAME = "Guest";
