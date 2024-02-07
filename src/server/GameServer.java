@@ -78,8 +78,8 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
             System.err.println("Error generating stats: " + e.getMessage());
         }
     }
-    private static final String RecordsFile = "records.txt";
-    private static final String StatisticsFile = "stats.txt";
+    private static final String RecordsFile = "appOutput/records.txt";
+    private static final String StatisticsFile = "appOutput/stats.txt";
     private static final int SIZE = 9;
     private static final int SUBGRID_SIZE = 3;
     private int[][] grid;
