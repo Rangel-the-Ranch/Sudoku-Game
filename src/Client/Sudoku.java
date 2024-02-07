@@ -1,10 +1,10 @@
-package Client;
+package client;
 
 import java.util.ArrayList;
 
-import Server.GameServerInterface;
-import Server.SudokuPuzzle;
-import Server.Stat;
+import types.SudokuPuzzle;
+import types.Stat;
+import types.SudokuMove;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

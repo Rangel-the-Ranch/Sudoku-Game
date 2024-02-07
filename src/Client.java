@@ -14,7 +14,7 @@ public class Client extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         //Load the board
-        URL boardFile = getClass().getResource("Client/board.fxml");
+        URL boardFile = getClass().getResource("resources/board.fxml");
         if (boardFile != null) {
             Parent root = FXMLLoader.load(boardFile);
             Scene scene = new Scene(root, 610, 800);

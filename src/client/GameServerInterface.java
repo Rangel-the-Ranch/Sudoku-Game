@@ -1,4 +1,7 @@
-package Server;
+package client;
+
+import types.SudokuPuzzle;
+import types.Stat;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

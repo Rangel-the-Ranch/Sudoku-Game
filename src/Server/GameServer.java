@@ -1,4 +1,8 @@
-package Server;
+package server;
+
+import types.SudokuPuzzle;
+import types.Stat;
+import client.GameServerInterface;
 
 import java.util.Random;
 import java.util.HashMap;

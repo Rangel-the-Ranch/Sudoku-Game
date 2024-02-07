@@ -1,4 +1,6 @@
-package Client;
+package client;
+
+import types.SudokuMove;
 
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;

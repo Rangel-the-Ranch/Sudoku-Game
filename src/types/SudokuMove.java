@@ -1,4 +1,4 @@
-package Client;
+package types;
 //This class is used to store the move made by the player
 @SuppressWarnings("unused")
 public class SudokuMove {
