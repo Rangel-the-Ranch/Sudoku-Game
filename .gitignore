@@ -1,5 +1,8 @@
 Project5.pdf
 
+### app output ###
+appOutput/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -71,3 +74,6 @@ mvnw.cmd
 # Gradle specific files
 .gradle/
 build/
+
+# Ignore .gitignore and .gitattributes files
+/appOutput

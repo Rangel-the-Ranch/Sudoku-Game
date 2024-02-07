@@ -2,6 +2,7 @@
 
 This Java application is a Sudoku game implemented using JavaFX for the graphical user interface and RMI (Remote Method Invocation) for server-client communication. This project aims to demonstrate proficiency in Java object-oriented programming and networking concepts.
 
+![medium puzzle](https://github.com/Rangel-the-Ranch/Sudoku-Game/blob/main/screenshots/mediumPuzzle.png)
 
 
 ## Features

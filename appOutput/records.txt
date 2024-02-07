@@ -1,2 +1,0 @@
-Guest 11 3
-Guest 2 -10

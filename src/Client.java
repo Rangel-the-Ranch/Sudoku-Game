@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 
 import java.net.URL;
 
-
 //In order to fully utilise the JAR file we must remove resources , types and client packages from the src folder
 //For the purpose of demonstration, we will not remove any of the packages
 public class Client extends Application{
@@ -20,7 +19,7 @@ public class Client extends Application{
         URL boardFile = getClass().getResource("resources/board.fxml");
         if (boardFile != null) {
             Parent root = FXMLLoader.load(boardFile);
-            Scene scene = new Scene(root, 610, 800);
+            Scene scene = new Scene(root, 610, 750);
             stage.setTitle("Sudoku Game");
             stage.setScene(scene);
             stage.show();
