@@ -8,6 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="application" />
-    <orderEntry type="library" name="geometry" level="project" />
+    <orderEntry type="library" name="Sudoku-Client" level="project" />
   </component>
 </module>

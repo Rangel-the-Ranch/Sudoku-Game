@@ -49,7 +49,7 @@ public class Sudoku {
             switch (difficulty) {
                 case "easy" -> temp = remoteObject.getPuzzle(41);
                 case "medium" -> temp = remoteObject.getPuzzle(51);
-                case "hard" -> temp = remoteObject.getPuzzle(5);//TODO: change back to 60
+                case "hard" -> temp = remoteObject.getPuzzle(61);
                 default -> temp = remoteObject.getPuzzle(50);
             }
             this.board = temp.getPuzzle();
